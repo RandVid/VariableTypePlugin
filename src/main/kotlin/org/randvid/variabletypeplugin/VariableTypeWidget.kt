@@ -34,18 +34,18 @@ class VariableTypeWidget(private val project: Project) : StatusBarWidget, CaretL
      */
     fun updateType(editor: Editor?) {
         if (editor == null || project.isDisposed) {
-            currentType.set("") // clear if editor is unavailable
+            currentType.set("")
             return
         }
 
         val file = com.intellij.psi.util.PsiUtilBase.getPsiFileInEditor(editor, project) ?: run {
-            currentType.set("") // clear if file is not a psi file
+            currentType.set("")
             return
         }
 
         val offset = editor.caretModel.offset
         val element = file.findElementAt(offset) ?: run {
-            currentType.set("") // clear if no element is at the caret offset
+            currentType.set("")
             return
         }
 
