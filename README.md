@@ -16,11 +16,12 @@ Simply place the caret on a variable, and its type will appear in the status bar
 ## Usage Screenshots
 ### Works for both built-in and declared classes:
 * #### Declared class:
-  ![](examples\declared_class.png)
+  ![Declared class example](./examples/declared_class.png)
 * #### Built-in class:
-  ![](examples\built-in_class.png)
+  ![Built-in class example](./examples/built-in_class.png)
+
 ### Works for both variable declaration and call:
 * #### Variable declaration:
-  ![](examples\variable_declaration.png)
+  ![Variable declaration example](./examples/variable_declaration.png)
 * #### Variable call:
-  ![](examples\variable_call.png)
+  ![Variable call example](./examples/variable_call.png)
