@@ -6,7 +6,6 @@ import com.intellij.openapi.wm.WindowManager
 
 class VariableTypeCaretListener : CaretListener {
     override fun caretPositionChanged(event: CaretEvent) {
-        println("[DEBUG] Caret moved to offset: ${event.editor.caretModel.offset}")
 
         val project = event.editor.project ?: return
         val statusBar = WindowManager.getInstance().getStatusBar(project) ?: return

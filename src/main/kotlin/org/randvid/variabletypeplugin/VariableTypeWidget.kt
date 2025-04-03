@@ -8,18 +8,16 @@ import com.intellij.openapi.wm.StatusBar
 import com.intellij.openapi.wm.StatusBarWidget
 import com.intellij.openapi.wm.impl.status.TextPanel
 import com.jetbrains.python.psi.PyExpression
+import com.jetbrains.python.psi.PyReferenceExpression
+import com.jetbrains.python.psi.PyTargetExpression
 import com.jetbrains.python.psi.types.PyType
 import com.jetbrains.python.psi.types.TypeEvalContext
 import java.util.concurrent.atomic.AtomicReference
 
 class VariableTypeWidget(private val project: Project) : StatusBarWidget, CaretListener {
-    private val currentType = AtomicReference("TEST")
+    private val currentType = AtomicReference("")
     private val textPanel = TextPanel().apply {
         isOpaque = false
-    }
-
-    init {
-        println("[DEBUG] Widget created")
     }
 
     override fun ID(): String = "VariableTypeWidget"
@@ -31,7 +29,6 @@ class VariableTypeWidget(private val project: Project) : StatusBarWidget, CaretL
     }
 
     fun updateType(editor: Editor?) {
-        println("[DEBUG] updateType called")
         if (editor == null || project.isDisposed) {
             currentType.set("")
             return
@@ -53,8 +50,12 @@ class VariableTypeWidget(private val project: Project) : StatusBarWidget, CaretL
             return
         }
 
+        if (!(expression is PyTargetExpression || expression is PyReferenceExpression)) {
+            currentType.set("")
+            return
+        }
+
         val type: PyType? = TypeEvalContext.codeAnalysis(project, file).getType(expression)
-        println("[DEBUG] Detected type: ${type?.name} for expression:")
 
         currentType.set(type?.name ?: "Any")
         textPanel.text = currentType.get()

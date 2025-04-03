@@ -6,9 +6,6 @@ import com.intellij.openapi.wm.StatusBarWidget
 import com.intellij.openapi.wm.StatusBarWidgetFactory
 
 class VariableTypeWidgetFactory : StatusBarWidgetFactory {
-    init {
-        println("[DEBUG] Factory initialized") // Should appear in logs
-    }
     override fun getId(): String = "VariableTypeWidget"
     override fun getDisplayName(): String = "Variable Type"
     override fun isAvailable(project: Project): Boolean = true
